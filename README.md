@@ -184,7 +184,7 @@ Let's take a moment to set up that variable, and set all relevant calls to use i
 
 > DO NOT replace values of `left` and `font-size` with `$space`. While it will totally work, it confuses our semantics - font size isn't a form of 'space'. If you want to set up variables for these values, do so seperately, with uniquely-identifiable names.
 
-<details><summary>My SCSS looks like this now:</summary>
+My SCSS looks like this now:
 ```css
 $space: 1rem;
 
@@ -257,7 +257,6 @@ footer {
     }
 }
 ```
-</details>
 
 ### FUNctions
 
