@@ -1,5 +1,5 @@
-# sassy-node
-Using SASS in a node project
+# SASSy Node
+Using SASS in a node project, for fun and profit
 
 ## Why is this Important?
 SASS makes CSS easier, and modularized - used correctly, you can start to mimic the MVC style of file organization you’re using on your backend. Also, it’s a huge draw for employers. Everyone knows SASS is better than straight CSS, but very few devs have taken the time to learn and implement it in their projects. Knowing it will give you a head start in the job search!
