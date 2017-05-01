@@ -88,11 +88,12 @@ If we make a change in our `main.scss` file, then save it, we should see a new f
 Now if we run our Simple Server (`python -m SimpleHTTPServer`), we should see that our styles have all but dissapeared! That's because our pre-existing styles are still in `style.css`. Let's move them over to our SCSS file. Remember, all CSS is valid SCSS. But we can do better! Let's take this code, and see how DRY we can make it with SASS.
 
 ### Nesting
-Let's start by nesting whatever style calls we can. Take a few minutes to next the styles as deeply as you can (but, it's best practice to not go more than 4 levels deep).
+Let's start by nesting whatever style calls we can. Take a few minutes to nest the styles as deeply as you can (but, it's best practice to not go more than 4 levels deep).
 
 
 <details><summary>Here's how I did it:</summary>
 ```css
+
 body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -161,6 +162,7 @@ footer {
       color:#cf2e31;
     }
 }
+
 ```
 </details>
 
