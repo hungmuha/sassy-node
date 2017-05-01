@@ -292,16 +292,22 @@ Now when we start our `.card` declaration, all we need to do is include the mixi
     }
 ```
 
-### Import
+### Importing partials
 
 Taking a good look at our styles, we can start to see components growing out of our code. In fact, `.card` is something that could really take on a life of it's own if any more were added. Maybe it belongs in it's own file?
 
 In Sass, we can use `@import` to seperate out our styles into semantic bits, the same way we do with our backend code in JS. Let's make a new scss file just for card styles:
 
-`touch sass/card.scss`
+`touch sass/_card.scss`
 
-Then remove the entirety of our `.card` declaration, and move it to `card.scss`
+Notice that I added an underscore before the file name - this tells Sass to bring in the scss raw, as it is, without compiling it. Remember that gulp is going to do all of our compiling, so there's no need for Sass to treat this as it's own independent document.
 
-This is a lot neater, but it's not connected yet. Add an import declaration into `main.scss`:
+Next, we can remove the entirety of our `.card` declaration, and move it to `card.scss`
 
-`@import 'reset';`
+This is a lot neater, but it's not connected yet. Add an import declaration into `main.scss`, right where the code used to be:
+
+`@import '_card';`
+
+Now whenever we save `main.scss`, we'll also be importing `_card.scss` into the mix.
+
+

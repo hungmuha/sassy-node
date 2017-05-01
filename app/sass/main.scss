@@ -18,27 +18,27 @@ header {
   margin-bottom: 1.618rem;
     .navbar {
       border-radius: 0;
-    }
+    } 
     h1 {
       font-weight: bold;
       letter-spacing: -2px;
       max-width: 100px;
         &:after {
           content: "™";
-          font-size: 1rem;
+          font-size: 1rem; 
           vertical-align: super;
           margin-left: 0.192rem;
         }
     }
 }
 
-@mixin colors ($background, $border, $color) {
-  background: $background;
-  border-color: $border;
-  color: $color;
+@mixin color ($background, $border, $color) {
+  background: $background; 
+  border-color: $border; 
+  color: $color;  
 }
 
-@import 'reset';
+@import '_card';
 
 footer {
   text-align: center;

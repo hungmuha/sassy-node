@@ -1,5 +1,5 @@
 .card {
-  @include colors(#231e1e, black, white);
+  @include color(#231e1e, black, white);
   padding: $space;
   min-height: 16rem;
   position: relative;
