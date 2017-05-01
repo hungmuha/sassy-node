@@ -92,7 +92,7 @@ Let's start by nesting whatever style calls we can. Take a few minutes to nest t
 
 
 <details><summary>Here's how I did it:</summary>
-```css
+``` css
 
 body {
   text-rendering: optimizeLegibility;
