@@ -77,3 +77,109 @@ gulp.task('default',function() {
 ```
 
 Now we can run our Sass compilation with just `gulp`.
+
+## Refactoring with Sass
+If we make a change in our `main.scss` file, then save it, we should see a new file pop into our CSS folder - `main.css`. Let's make that our new stylesheet, by changing the link in `index.html`:
+
+```html
+<link rel="stylesheet" href="css/main.css">
+```
+
+Now if we run our Simple Server (`python -m SimpleHTTPServer`), we should see that our styles have all but dissapeared! That's because our pre-existing styles are still in `style.css`. Let's move them over to our SCSS file. Remember, all CSS is valid SCSS. But we can do better! Let's take this code, and see how DRY we can make it with SASS.
+
+### Nesting
+Let's start by nesting whatever style calls we can. Take a few minutes to next the styles as deeply as you can (but, it's best practice to not go more than 4 levels deep).
+
+
+<details><summary>Here's how I did it:</summary>
+```css
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+    .container {
+      margin: 4rem;
+        .row {
+            margin: 0;
+        }
+    } 
+}
+
+header {
+  border-bottom: 1px solid black;
+  padding-bottom: 1rem;
+  margin-bottom: 1.618rem;
+    .navbar {
+      border-radius: 0;
+    }
+    h1 {
+      font-weight: bold;
+      letter-spacing: -2px;
+      max-width: 100px;
+    }
+    h1:after {
+      content: "™";
+      font-size: 1rem;
+      vertical-align: super;
+      margin-left: 0.192rem;
+    }
+}
+
+.card {
+  background: #231e1e;
+  border-color: black;
+  color: white;
+  padding: 1rem;
+  min-height: 16rem;
+  position: relative;
+    h6 {
+      position: absolute;
+      font-size: 0.6rem;
+      margin-top: 1.618rem;
+      opacity: 0.2;
+      bottom: 0.618rem;
+      left: 1rem;
+    }
+    h6:after {
+      content: "™";
+      font-size: 1rem;
+      vertical-align: super;
+      margin-left: 0.192rem;
+      font-size: 60%;
+      margin-left: 1px;
+
+    }
+}
+
+footer {
+  text-align: center;
+  margin-top: 2rem;
+  color: silver;
+  font-size: 0.6rem;
+    .heart {
+      color:#cf2e31;
+    }
+}
+```
+</details>
+
+Notice in the above example that I broke the page into components - body(or structure), header, cards, and footer. This will help us scale our project if and when we add new functionality.
+
+### Variables
+
+Variables are a great way of reducing repeition in our code. Let's look for any vaules in our SCSS that are used more than once, and turn them into variables. Remember, the variable syntax for SASS is as follows:
+
+`$my-variable: value;`
+
+For starters, I see more than one place where padding has been set to 1rem. This is the perfect value to turn into a variable, because not only will it make it easier to change the value in the future, but it can serve to set up a design pattern that is easy to follow. is we set up a variable that establishes that:
+
+`$padding: 1rem;`
+
+We've now set a system-wide standard for how to space any future objects on our page. No more guessing or eyeballing!
+Let's take a moment to set up that variable, and set all relevant calls to use it:
+
+`padding: $padding;`
+
+
+
+
