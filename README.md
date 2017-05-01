@@ -306,7 +306,7 @@ In Sass, we can use `@import` to seperate out our styles into semantic bits, the
 
 Notice that I added an underscore before the file name - this tells Sass to bring in the scss raw, as it is, without compiling it. Remember that gulp is going to do all of our compiling, so there's no need for Sass to treat this as it's own independent document.
 
-Next, we can remove the entirety of our `.card` declaration, and move it to `card.scss`
+Next, we can remove the entirety of our `.card` declaration, and move it to `card.scss`.
 
 This is a lot neater, but it's not connected yet. Add an import declaration into `main.scss`, right where the code used to be:
 
