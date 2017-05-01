@@ -116,12 +116,12 @@ header {
       font-weight: bold;
       letter-spacing: -2px;
       max-width: 100px;
-    }
-    h1:after {
-      content: "™";
-      font-size: 1rem;
-      vertical-align: super;
-      margin-left: 0.192rem;
+        &:after {
+          content: "™";
+          font-size: 1rem;
+          vertical-align: super;
+          margin-left: 0.192rem;
+        }
     }
 }
 
@@ -139,15 +139,14 @@ header {
       opacity: 0.2;
       bottom: 0.618rem;
       left: 1rem;
-    }
-    h6:after {
-      content: "™";
-      font-size: 1rem;
-      vertical-align: super;
-      margin-left: 0.192rem;
-      font-size: 60%;
-      margin-left: 1px;
-
+        &:after {
+          content: "™";
+          font-size: 1rem;
+          vertical-align: super;
+          margin-left: 0.192rem;
+          font-size: 60%;
+          margin-left: 1px;
+        }
     }
 }
 
@@ -180,6 +179,78 @@ Let's take a moment to set up that variable, and set all relevant calls to use i
 
 `padding: $padding;`
 
+> DO NOT replace values of `left` and `font-size` with `$padding`. While it will totally work, it confuses our semantics - font size isn't a form of padding. If you want to set up variables for these values, do so seperately, with uniquely-identifiable names.
 
+<details><summary>My SCSS looks like this now:</summary>
+```css
+$padding: 1rem;
 
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+    .container {
+      margin: 4rem;
+        .row {
+            margin: 0;
+        }
+    } 
+}
+
+header {
+  border-bottom: 1px solid black;
+  padding-bottom: $padding;
+  margin-bottom: 1.618rem;
+    .navbar {
+      border-radius: 0;
+    }
+    h1 {
+      font-weight: bold;
+      letter-spacing: -2px;
+      max-width: 100px;
+        &:after {
+          content: "™";
+          font-size: 1rem;
+          vertical-align: super;
+          margin-left: 0.192rem;
+        }
+    }
+}
+
+.card {
+  background: #231e1e;
+  border-color: black;
+  color: white;
+  padding: $padding;
+  min-height: 16rem;
+  position: relative;
+    h6 {
+      position: absolute;
+      font-size: 0.6rem;
+      margin-top: 1.618rem;
+      opacity: 0.2;
+      bottom: 0.618rem;
+      left: 1rem;
+        &:after {
+          content: "™";
+          font-size: 1rem;
+          vertical-align: super;
+          margin-left: 0.192rem;
+          font-size: 60%;
+          margin-left: 1px;
+        }
+    }
+}
+
+footer {
+  text-align: center;
+  margin-top: 2rem;
+  color: silver;
+  font-size: 0.6rem;
+    .heart {
+      color:#cf2e31;
+    }
+}
+```
+</details>
 
