@@ -370,7 +370,16 @@ Obviously, your layout wasn't built for this. But because you future-proofed you
 1. Make it look exactly like the other `.card`s, except with a white background and a `#231e1e` border and text.
 2. Add the standard amount of margin to it.
 
-How dry can you make the code for this new page addition? It's possible to do it with only 3 CSS rules. Good luck!
+How dry can you make the code for this new page addition? It's possible to do it with only 3 CSS rules. Look back at what we've learned in this lesson to create this new style rule with the fewest calls possible.
+
+## Further Reading
+
+- [More on the Import Directive](http://vanseodesign.com/css/sass-the-import-directive/)
+- [Sass Basics](http://sass-lang.com/guide)
+- [More on the Mixin Directive](https://www.sitepoint.com/sass-basics-the-mixin-directive/)
+- [Sass and Compass Color Functions](http://jackiebalzer.com/color)
+
+
 
 
 
