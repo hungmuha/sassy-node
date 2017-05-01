@@ -132,6 +132,8 @@ header {
   padding: 1rem;
   min-height: 16rem;
   position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
     h6 {
       position: absolute;
       font-size: 0.6rem;
@@ -224,6 +226,8 @@ header {
   padding: $space;
   min-height: 16rem;
   position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
     h6 {
       position: absolute;
       font-size: 0.6rem;
@@ -309,5 +313,64 @@ This is a lot neater, but it's not connected yet. Add an import declaration into
 `@import '_card';`
 
 Now whenever we save `main.scss`, we'll also be importing `_card.scss` into the mix.
+
+>Protip: `_card.scss` doesn't get compiled when you save it - it only gets compiled when `main.scss` is saved. This is because it's a partial - if you hate this, remove the underscore to make it a full-blown scss document. But be warned - your site will now be making 2 HTTP requests, one for each scss document.
+
+### Extending/Inheritance
+
+Sometimes, our classs will be so similar, that we'll want to use most (if not all) of their existing styles. With Sass, we can simply `extend` our classes by mentioning them in another class:
+
+```CSS
+    .message {
+      border: 1px solid #ccc;
+      padding: 10px;
+      color: #333;
+    }
+
+    .success {
+      @extend .message;
+      border-color: green;
+    }
+
+    .error {
+      @extend .message;
+      border-color: red;
+    }
+
+    .warning {
+      @extend .message;
+      border-color: yellow;
+    }
+```
+
+I don't see a reason to do this in our code though . . . not yet at least . . .
+
+## Client Call!
+
+Did you hear that telephone just now? It was our client over at Cards Against Assembly, and they have some urgent changes they need made to the site! Turns out, no one seems to know what this game is all about, so they need you to add a new card right below the header:
+
+```html
+    <div class='row'>
+      <section id="instructions">
+        <div class='instruction_card col-sm-12 col-md-12 col-lg-12'>
+          <h4>What is Cards Against Assembly?</h4>
+          <p>
+            Cards Against Assembly is a party game for General Assembly Students. Unlike most of the party games you've played before, Cards Against Assembly is as amazing and wonderful as you and your friends.
+          </p>
+          <p>
+            The game is simple. Each round, one player asks a question from a black card, and everyone else answers with their funniest white card.
+          </p>
+        </div>
+      </div>
+    </section>
+```
+
+Obviously, your layout wasn't built for this. But because you future-proofed your code with Sass, I bet it won't be that hard to add! Here's the client requests:
+
+1. Make it look exactly like the other `.card`s, except with a white background and a `#231e1e` border and text.
+2. Add the standard amount of margin to it.
+
+How dry can you make the code for this new page addition? It's possible to do it with only 3 CSS rules. Good luck!
+
 
 

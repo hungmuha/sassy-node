@@ -3,6 +3,8 @@
   padding: $space;
   min-height: 16rem;
   position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
     h6 {
       position: absolute;
       font-size: 0.6rem;
@@ -19,4 +21,10 @@
           margin-left: 1px;
         }
     }
+}
+
+.instruction_card {
+  @extend .card;
+  @include color(white, #231e1e, #231e1e);
+  margin: $space;
 }
