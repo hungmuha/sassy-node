@@ -170,20 +170,20 @@ Variables are a great way of reducing repeition in our code. Let's look for any 
 
 `$my-variable: value;`
 
-For starters, I see more than one place where padding has been set to 1rem. This is the perfect value to turn into a variable, because not only will it make it easier to change the value in the future, but it can serve to set up a design pattern that is easy to follow. is we set up a variable that establishes that:
+For starters, I see more than one place where padding has been set to 1rem. This is the perfect value to turn into a variable, because not only will it make it easier to change the value in the future, but it can serve to set up a design pattern that is easy to follow. So, let's set up a variable to define what the default padding/margin space should be:
 
-`$padding: 1rem;`
+`$space: 1rem;`
 
 We've now set a system-wide standard for how to space any future objects on our page. No more guessing or eyeballing!
 Let's take a moment to set up that variable, and set all relevant calls to use it:
 
-`padding: $padding;`
+`padding: $space;`
 
-> DO NOT replace values of `left` and `font-size` with `$padding`. While it will totally work, it confuses our semantics - font size isn't a form of padding. If you want to set up variables for these values, do so seperately, with uniquely-identifiable names.
+> DO NOT replace values of `left` and `font-size` with `$space`. While it will totally work, it confuses our semantics - font size isn't a form of 'space'. If you want to set up variables for these values, do so seperately, with uniquely-identifiable names.
 
 <details><summary>My SCSS looks like this now:</summary>
 ```css
-$padding: 1rem;
+$space: 1rem;
 
 body {
   text-rendering: optimizeLegibility;
@@ -199,7 +199,7 @@ body {
 
 header {
   border-bottom: 1px solid black;
-  padding-bottom: $padding;
+  padding-bottom: $space;
   margin-bottom: 1.618rem;
     .navbar {
       border-radius: 0;
@@ -221,7 +221,7 @@ header {
   background: #231e1e;
   border-color: black;
   color: white;
-  padding: $padding;
+  padding: $space;
   min-height: 16rem;
   position: relative;
     h6 {
@@ -254,3 +254,54 @@ footer {
 ```
 </details>
 
+### FUNctions
+
+Variables are fine being used as they are, but we can also use them in functions, similar to JS. While there's a lot of insane things you can do with this power, you'll usually be using it for very simple calculations. For instance, the margin on our `footer` is `2rem`, or double our `$space` variable. Why not make it dynamic with a little math?
+
+`margin-top: $space*2;`
+
+>Now, this is where you'll have to start making personal calls, based on your app. Do you always want margin to be double the value of padding? It's easy to paint yourself into a corner using variables and functions, so make sure you have a plan for the future of your app before you make everything dynamic.
+
+### Mixins
+
+Mixins allow us to seperate out some of the most tedius, repetative CSS calls, and assign values to them with simple parameters. For instance, in almost every block level element, you'll find yourself declaring values for the background color, text color, and border color, like we do on `.card`:
+
+```css
+    .card {
+        background: #231e1e;
+        border-color: black;
+        color: white;
+    }
+```
+
+What if, in the future, we wanted different types of cards, with different colors? Instead of declaring these for each value, we can write a 'colors' mixin that handles all three values for us:
+
+```css
+    @mixin colors ($background, $border, $color) {
+      background: $background;
+      border-color: $border;
+      color: $color;
+    }
+```
+
+Now when we start our `.card` declaration, all we need to do is include the mixin, along with our values:
+
+```css
+    .card {
+        @include colors(#231e1e, black, white);
+    }
+```
+
+### Import
+
+Taking a good look at our styles, we can start to see components growing out of our code. In fact, `.card` is something that could really take on a life of it's own if any more were added. Maybe it belongs in it's own file?
+
+In Sass, we can use `@import` to seperate out our styles into semantic bits, the same way we do with our backend code in JS. Let's make a new scss file just for card styles:
+
+`touch sass/card.scss`
+
+Then remove the entirety of our `.card` declaration, and move it to `card.scss`
+
+This is a lot neater, but it's not connected yet. Add an import declaration into `main.scss`:
+
+`@import 'reset';`
