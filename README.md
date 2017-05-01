@@ -91,7 +91,7 @@ Now if we run our Simple Server (`python -m SimpleHTTPServer`), we should see th
 Let's start by nesting whatever style calls we can. Take a few minutes to nest the styles as deeply as you can (but, it's best practice to not go more than 4 levels deep).
 
 
-<details><summary>Here's how I did it:</summary>
+Here's how I did it:
 ``` css
 
 body {
@@ -164,7 +164,6 @@ footer {
 }
 
 ```
-</details>
 
 Notice in the above example that I broke the page into components - body(or structure), header, cards, and footer. This will help us scale our project if and when we add new functionality.
 
