@@ -1,4 +1,4 @@
-# SASSy Node
+# SASSy Node 
 Using SASS in a node project, for fun and profit
 
 ## Why is this Important?
