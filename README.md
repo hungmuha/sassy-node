@@ -312,7 +312,7 @@ Variables are fine being used as they are, but we can also use them in functions
 
 ### Mixins
 
-Mixins allow us to seperate out some of the most tedius, repetative CSS calls, and assign values to them with simple parameters. For instance, in almost every block level element, you'll find yourself declaring values for the background color, text color, and border color, like we do on `.card`:
+[Mixins](http://sass-lang.com/guide#topic-6) allow us to seperate out some of the most tedius, repetative CSS calls, and assign values to them with simple parameters. For instance, in almost every block level element, you'll find yourself declaring values for the background color, text color, and border color, like we do on `.card`:
 
 ```css
     .card {
