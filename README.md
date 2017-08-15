@@ -2,7 +2,7 @@
 Using SASS in a node project, for fun and profit
 
 ## Why is this Important?
-SASS makes CSS easier, and modularized - used correctly, you can start to mimic the MVC style of file organization you’re using on your backend. Also, it’s a huge draw for employers. Everyone knows SASS is better than straight CSS, but very few devs have taken the time to learn and implement it in their projects. Knowing it will give you a head start in the job search!
+SASS makes CSS easier, and modularized - used correctly, you can start to mimic the MVC style of file organization you’re using on your backend (or f/e frameworks like Angular). Also, it’s a huge draw for employers. Everyone knows SASS is better than straight CSS, but very few devs have taken the time to learn and implement it in their projects. Knowing it will give you a head start in the job search!
 
 ## Objectives
 1. Add Node/Gulp/Sass to an existing project
@@ -13,11 +13,16 @@ SASS makes CSS easier, and modularized - used correctly, you can start to mimic 
 The starter code in this folder (`app`) is the solution code from our [Angular Directives Lab](https://github.com/den-materials/angular-directives-lab). It’s just a frontend, but that’s all we need to get started!
 Let’s start by initializing our repo with NPM and installing Gulp.
 
-### Initializing Node
+### 1. Initialize Node
 
 Hopefully this step isn’t too distant a memory - but in case you’ve forgotten, `cd` into the `app` folder and run `npm init -y`.
 
-### Installing Gulp
+### 2. Run your Angular project
+
+Start a Python Simple Server to run your project:
+`python -m SimpleHTTPServer`
+
+### 3. Install Gulp
 
 1. First, cd into the app folder, `cd` into it, and `npm init -y` your project
 You’ll want to install gulp globally. You can do this by running the `npm install gulp -g` command.
@@ -35,7 +40,7 @@ gulp.task('default', function() {
 ```
 1. In your terminal, run `gulp`! You should see our default task run.
 
-### Compiling Sass
+### 4. Compile Sass
 
 Now let's compile some Sass to CSS.  We need to start by requiring the `gulp-sass` plugin for Gulp.
 
@@ -78,6 +83,45 @@ gulp.task('default',function() {
 
 Now we can run our Sass compilation with just `gulp`.
 
+### 5. What the hell, let's add Browser Sync as well
+
+Gulp is so cool. In addition to Sass Compiling, we can give our apps other neat tricks, such as using `Browser Sync` to reload our page every time a page is saved.
+
+Start by installing `Browser Sync`:
+`npm install browser-sync gulp --save-dev`
+
+Next, we can rewrite our `gulpfile.js` to have `Browser Sync` watch our file, and reload every time a page changes:
+
+```js
+var gulp = require('gulp');
+var sass = require('gulp-sass');
+var browserSync = require('browser-sync').create();
+
+// Static Server + watching scss/html files
+gulp.task('serve', ['sass'], function() {
+
+    browserSync.init({
+        server: "./"
+    });
+
+    gulp.watch("sass/**/*.scss", ['sass']);
+    gulp.watch("*.html").on('change', browserSync.reload);
+});
+
+// Compile sass into CSS & auto-inject into browsers
+gulp.task('sass', function() {
+    return gulp.src("sass/**/*.scss")
+        .pipe(sass())
+        .pipe(gulp.dest("./css/"))
+        .pipe(browserSync.stream());
+});
+
+gulp.task('default', ['serve']);
+```
+>The above functions were contructed using [Browser Sync's Documentation](https://browsersync.io/docs/gulp)
+
+You can stop your Python Simple Server now - `Browser Sync` is running the show now! Restart `gulp` and watch it go!
+
 ## Refactoring with Sass
 If we make a change in our `main.scss` file, then save it, we should see a new file pop into our CSS folder - `main.css`. Let's make that our new stylesheet, by changing the link in `index.html`:
 
@@ -85,13 +129,13 @@ If we make a change in our `main.scss` file, then save it, we should see a new f
 <link rel="stylesheet" href="css/main.css">
 ```
 
-Now if we run our Simple Server (`python -m SimpleHTTPServer`), we should see that our styles have all but dissapeared! That's because our pre-existing styles are still in `style.css`. Let's move them over to our SCSS file. Remember, all CSS is valid SCSS. But we can do better! Let's take this code, and see how DRY we can make it with SASS.
+Go back to the browser, and you should see that our styles have all but dissapeared! That's because our pre-existing styles are still in `style.css`. Let's move them over to our SCSS file. Remember, all CSS is valid SCSS. But we can do better! Let's take this code, and see how DRY we can make it with SASS.
 
 ### Nesting
 Let's start by nesting whatever style calls we can. Take a few minutes to nest the styles as deeply as you can (but, it's best practice to not go more than 4 levels deep).
 
 
-Here's how I did it:
+<details><summary>Want a hint? Here's how I did it . . .</summary>
 ``` css
 
 body {
@@ -164,7 +208,7 @@ footer {
 }
 
 ```
-
+</details>
 Notice in the above example that I broke the page into components - body(or structure), header, cards, and footer. This will help us scale our project if and when we add new functionality.
 
 ### Variables
