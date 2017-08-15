@@ -132,10 +132,10 @@ If we make a change in our `main.scss` file, then save it, we should see a new f
 Go back to the browser, and you should see that our styles have all but dissapeared! That's because our pre-existing styles are still in `style.css`. Let's move them over to our SCSS file. Remember, all CSS is valid SCSS. But we can do better! Let's take this code, and see how DRY we can make it with SASS.
 
 ### Nesting
-Let's start by nesting whatever style calls we can. Take a few minutes to nest the styles as deeply as you can (but, it's best practice to not go more than 4 levels deep).
+Let's start by [nesting](http://sass-lang.com/guide#topic-3) whatever style calls we can. Take a few minutes to nest the styles as deeply as you can (but, it's best practice to not go more than 4 levels deep).
 
 
-<details><summary>Want a hint? Here's how I did it . . .</summary>
+Here's how I did it:
 ``` css
 
 body {
@@ -208,12 +208,12 @@ footer {
 }
 
 ```
-</details>
+
 Notice in the above example that I broke the page into components - body(or structure), header, cards, and footer. This will help us scale our project if and when we add new functionality.
 
 ### Variables
 
-Variables are a great way of reducing repeition in our code. Let's look for any vaules in our SCSS that are used more than once, and turn them into variables. Remember, the variable syntax for SASS is as follows:
+[Variables](http://sass-lang.com/guide#topic-2) are a great way of reducing repeition in our code. Let's look for any vaules in our SCSS that are used more than once, and turn them into variables. Remember, the variable syntax for SASS is as follows:
 
 `$my-variable: value;`
 
@@ -304,7 +304,7 @@ footer {
 
 ### FUNctions
 
-Variables are fine being used as they are, but we can also use them in functions, similar to JS. While there's a lot of insane things you can do with this power, you'll usually be using it for very simple calculations. For instance, the margin on our `footer` is `2rem`, or double our `$space` variable. Why not make it dynamic with a little math?
+Variables are fine being used as they are, but we can also use them in functions, similar to JS. While there's a lot of [insane things](http://12devs.co.uk/articles/handy-advanced-sass/) you can do with this power, you'll usually be using it for very simple calculations. For instance, the margin on our `footer` is `2rem`, or double our `$space` variable. Why not make it dynamic with a little math?
 
 `margin-top: $space*2;`
 
@@ -348,7 +348,7 @@ In Sass, we can use `@import` to seperate out our styles into semantic bits, the
 
 `touch sass/_card.scss`
 
-Notice that I added an underscore before the file name - this tells Sass to bring in the scss raw, as it is, without compiling it. Remember that gulp is going to do all of our compiling, so there's no need for Sass to treat this as it's own independent document.
+Notice that I added an underscore before the file name - this tells Sass it's a `partial `. Partials don't get compiled into their own document, but instead are meant only to be brought into other SCSS documents raw. As a result, Gulp will ignore changes in this file and only recompile when `main.scss` is saved.
 
 Next, we can remove the entirety of our `.card` declaration, and move it to `card.scss`.
 
@@ -358,7 +358,7 @@ This is a lot neater, but it's not connected yet. Add an import declaration into
 
 Now whenever we save `main.scss`, we'll also be importing `_card.scss` into the mix.
 
->Protip: `_card.scss` doesn't get compiled when you save it - it only gets compiled when `main.scss` is saved. This is because it's a partial - if you hate this, remove the underscore to make it a full-blown scss document. But be warned - your site will now be making 2 HTTP requests, one for each scss document.
+>Protip: `_card.scss` doesn't get compiled when you save it - it only gets compiled when `main.scss` is saved by default (you don't see this in our build, though, because Browser Sync is watching EVERY file for changes). This is because it's a partial - if you hate this, remove the underscore to make it a full-blown scss document. But be warned - your site will now be making 2 HTTP requests, one for each scss document.
 
 ### Extending/Inheritance
 
@@ -394,24 +394,22 @@ I don't see a reason to do this in our code though . . . not yet at least . . .
 Did you hear that telephone just now? It was our client over at Cards Against Assembly, and they have some urgent changes they need made to the site! Turns out, no one seems to know what this game is all about, so they need you to add a new card right below the header:
 
 ```html
-    <div class='row'>
-      <section id="instructions">
-        <div class='instruction_card col-sm-12 col-md-12 col-lg-12'>
-          <h4>What is Cards Against Assembly?</h4>
-          <p>
-            Cards Against Assembly is a party game for General Assembly Students. Unlike most of the party games you've played before, Cards Against Assembly is as amazing and wonderful as you and your friends.
-          </p>
-          <p>
-            The game is simple. Each round, one player asks a question from a black card, and everyone else answers with their funniest white card.
-          </p>
-        </div>
+    <section id="instructions" class="row">
+      <div class='instruction_card col-sm-12 col-md-12 col-lg-12'>
+        <h4>What is Cards Against Assembly?</h4>
+        <p>
+          Cards Against Assembly is a party game for General Assembly Students. Unlike most of the party games you've played before, Cards Against Assembly is as amazing and wonderful as you and your friends.
+        </p>
+        <p>
+          The game is simple. Each round, one player asks a question from a black card, and everyone else answers with their funniest white card.
+        </p>
       </div>
     </section>
 ```
 
 Obviously, your layout wasn't built for this. But because you future-proofed your code with Sass, I bet it won't be that hard to add! Here's the client requests:
 
-1. Make it look exactly like the other `.card`s, except with a white background and a `#231e1e` border and text.
+1. Make it look exactly like the other `.card`s, only with inverted colors -it shoudl have a white background and a `#231e1e` border and text.
 2. Add the standard amount of margin to it.
 
 How dry can you make the code for this new page addition? It's possible to do it with only 3 CSS rules. Look back at what we've learned in this lesson to create this new style rule with the fewest calls possible.
